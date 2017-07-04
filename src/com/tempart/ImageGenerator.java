@@ -17,6 +17,7 @@ public final class ImageGenerator {
 
 
     public static void generateImage(TemperatureImage temperatureImage) throws IOException, ParseException {
+        System.out.println("Starting Image Generation");
         Queue<Double> temperatures = loadData(temperatureImage);
         BufferedImage img = drawImage(temperatureImage, temperatures);
         writeImage(temperatureImage, img);
@@ -29,9 +30,11 @@ public final class ImageGenerator {
         return temperatures;
     }
 
-    private static BufferedImage drawImage(TemperatureImage temperatureImage, Queue<Double> temperatures) {
+    private static BufferedImage drawImage(TemperatureImage temperatureImage, Queue<Double> temperatures) throws IOException {
         BufferedImage img = new BufferedImage(temperatureImage.getOutputPictureDimensions().width, temperatureImage.getOutputPictureDimensions().height, BufferedImage.TYPE_INT_ARGB );
         for(int y = 0; y < temperatureImage.getOutputPictureDimensions().height; y++) {
+            String data = "\r\tCalculating Colors("+ temperatureImage.getColor().toString()+"):\t" + (y*100/temperatureImage.getOutputPictureDimensions().height) + "%";
+            System.out.write(data.getBytes());
             if(y % (temperatureImage.getOutputPictureDimensions().height/ temperatureImage.getInputDataDimensions().height) == 0){
                 for (int x = 0; x < temperatureImage.getOutputPictureDimensions().width; x++) {
                     img.setRGB(x, y, temperatureImage.getPictureColor().getColor((float) temperatures.poll().doubleValue()).getRGB());
@@ -42,13 +45,16 @@ public final class ImageGenerator {
                 }
             }
         }
+        String data = "\r\tCalculating Colors("+ temperatureImage.getColor().toString()+"):\t100%\n";
+        System.out.write(data.getBytes());
         return img;
     }
 
     private static void writeImage(TemperatureImage temperatureImage, BufferedImage img) throws IOException {
+        System.out.println("\tWriting File: " + temperatureImage.getOutputPath());
         File outputFile = new File(temperatureImage.getOutputPath());
         ImageIO.write(img, "PNG", outputFile);
-        System.out.println("Write file: " + temperatureImage.getOutputPath());
+        System.out.println("Picture successful generated\n\n");
     }
 
     public static Queue<Double> scaleImage(TemperatureImage temperatureImage, Queue<Double> temperatures){

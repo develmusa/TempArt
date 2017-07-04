@@ -15,6 +15,7 @@ public final class DataParser {
     }
 
     public static void readFile(DataSet dataSet, String regex) throws FileNotFoundException, ParseException {
+        System.out.println("\tReading Data Set:\t" + dataSet.getPath());
         Scanner scanner = new Scanner(new File(dataSet.getPath()));
         while(scanner.hasNext()){
             String scannerIn = scanner.nextLine();
@@ -23,7 +24,10 @@ public final class DataParser {
             writeData(dataSet, temperature, time);
         }
         scanner.close();
-        System.out.println("Temperatures in Queue: " + dataSet.getTemperatures().size());
+        System.out.println("\tData Parsing Complete");
+        System.out.println("\t\tNumber Of Data Points:\t" + dataSet.getTemperatures().size());
+        System.out.println("\t\tHighest Temperature:\t" + dataSet.getHighestTemp() + "°C");
+        System.out.println("\t\tLowest Temperature:\t\t" + dataSet.getLowestTemp() + "°C");
     }
 
     private static void writeData(DataSet dataSet, double temperature, LocalDateTime time) {

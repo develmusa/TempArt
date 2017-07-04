@@ -1,8 +1,7 @@
 package com.tempart.coloring;
 
-/**
- * Created by samuel on 04.07.17.
- */
 public enum ColorMap {
-    HOT, AFMHOT, HSV, RAINBOW
+    HOT("HOT"), AFMHOT("AFMHOT"), HSV("HSV"), RAINBOW("RAINBOW");
+    private ColorMap(final String text) {}
+
 }
