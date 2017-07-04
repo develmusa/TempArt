@@ -16,6 +16,7 @@ public class Main {
 
         final HashMap<String, String> dataSets  = new HashMap<>();
         final ArrayList<TemperatureImage> temperatureImages = new ArrayList<>();
+
         //Data Sets with temperature values
         dataSets.put("Copenhagen_1993", "./data/history_export_Copenhagen_19930101-19940101_20160921.csv");
         dataSets.put("Brugg_1990", "./data/history_export_Brugg_19900101-19910101-20160921.csv");

@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 
 public final class DataParser {
-    //private static String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
 
     private DataParser() {
     }
@@ -21,20 +20,24 @@ public final class DataParser {
             String scannerIn = scanner.nextLine();
             double temperature = temperaturePatternMatcher(scannerIn, regex);
             LocalDateTime time = timePatternMatcher(scannerIn, regex);
-            if (time != null){
-                dataSet.getTemperatures().add(temperature);
-                DataPoint datapoint = new DataPoint(time, temperature);
-                dataSet.getDataPointsRaw().add(datapoint);
-                if (temperature > dataSet.getHighestTemp()) {
-                    dataSet.setHighestTemp(temperature);
-                }
-                else if (temperature < dataSet.getLowestTemp()) {
-                    dataSet.setLowestTemp(temperature);
-                }
-            }
+            writeData(dataSet, temperature, time);
         }
         scanner.close();
         System.out.println("Temperatures in Queue: " + dataSet.getTemperatures().size());
+    }
+
+    private static void writeData(DataSet dataSet, double temperature, LocalDateTime time) {
+        if (time != null){
+            dataSet.getTemperatures().add(temperature);
+            DataPoint datapoint = new DataPoint(time, temperature);
+            dataSet.getDataPointsRaw().add(datapoint);
+            if (temperature > dataSet.getHighestTemp()) {
+                dataSet.setHighestTemp(temperature);
+            }
+            else if (temperature < dataSet.getLowestTemp()) {
+                dataSet.setLowestTemp(temperature);
+            }
+        }
     }
 
     private static double temperaturePatternMatcher(String attributes, String regex) throws ParseException {
