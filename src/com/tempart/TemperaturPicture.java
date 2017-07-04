@@ -20,13 +20,36 @@ public class TemperaturPicture {
     private final int outputSizeX = 9504;
     private final String outputPath;
     private final ColorGradient pictureColor;
+    private final ColorMap color;
 
 
-    public TemperaturPicture(String outputPath, String inputPath, ColorGradient pictureColorGradient) {
+    public TemperaturPicture(String outputPath, String inputPath, ColorMap color) {
         this.outputPath = outputPath;
         this.inputPath = inputPath;
-        this.pictureColor = pictureColorGradient;
+        this.color = color;
+        switch (color) {
+            case HOT:
+                this.pictureColor = new Hot();
+                break;
+            case AFMHOT:
+                this.pictureColor = new AfmHot();
+                break;
+            case HSV:
+                this.pictureColor = new Hsv();
+                break;
+            case RAINBOW:
+                this.pictureColor = new Rainbow();
+                break;
+            default:
+                System.out.println("Using default ColorMap: HOT");
+                this.pictureColor = new Hot();
+                //throw new UnsupportedOperationException("");
+                break;
+
+
+        }
     }
+
 
     public void drawImage() throws IOException, ParseException {
         TempReader tempReader = new TempReader(inputPath);

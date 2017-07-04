@@ -21,11 +21,10 @@ public class Main {
         final ArrayList<TemperaturPicture> pictures = new ArrayList<>();
 
         for (Map.Entry<String, String> data : dataSets.entrySet()) {
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), new AfmHot()));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), new Hsv()));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), new Hot()));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), new Rainbow()));
-
+            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT));
+            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV));
+            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT));
+            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW));
         }
 
         for (TemperaturPicture picture: pictures) {
