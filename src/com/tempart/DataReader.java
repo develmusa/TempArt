@@ -31,15 +31,10 @@ public class DataReader {
             String scannerIn = scanner.nextLine();
             double temperature = temperaturPatternMatcher(scannerIn);
             LocalDateTime time = timePatternMatcher(scannerIn);
-
-
             if (time != null){
                 temeratures.add(temperature);
-                //System.out.println("Add to list:    " + temperature);
                 DataPoint datapoint = new DataPoint(time, temperature);
-                //System.out.println("Datepoint   Time: " + datapoint.getTime() + " Temp: "+ datapoint.getTemp());
                 dataPointsRaw.add(datapoint);
-
                 if (temperature > highestTemp) {
                     highestTemp = temperature;
                 }
@@ -50,28 +45,6 @@ public class DataReader {
         }
         scanner.close();
         System.out.println("Temperatures in Queue: " + temeratures.size());
-//        insertMissingDatapoints();
-    }
-
-    public void insertMissingDatapoints(){
-        dataPointsCompleted = new LinkedList<>();
-        DataPoint tempDataPoint;
-        int day = 1;
-        int values = 0;
-        while (!dataPointsRaw.isEmpty()){
-            tempDataPoint = dataPointsRaw.poll();
-            long minutes = ChronoUnit.MINUTES.between(tempDataPoint.getTime(), dataPointsRaw.peek().getTime());
-            if (minutes == 5)
- //               System.out.println("Time differenze: "+ minutes);
-            if (day == tempDataPoint.getTime().getDayOfYear()){
-                values++;
-            } else {
-                day++;
-                System.out.println("Date: " +  tempDataPoint.getTime().getDayOfYear() + "  ValueCount: " +  values);
-                values = 0;
-            }
-        }
-
     }
     private double temperaturPatternMatcher(String attributes) throws ParseException {
         Pattern pattern = Pattern.compile(regex);
