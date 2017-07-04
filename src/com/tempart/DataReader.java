@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by sikcd on 21.09.2016.
  */
-public class TempReader {
+public class DataReader {
     private String path;
     private String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
     private Queue<Double> temeratures;
@@ -95,7 +95,7 @@ public class TempReader {
         return null;
     }
 
-    public TempReader(String path) {
+    public DataReader(String path) {
         this.path = path;
     }
 

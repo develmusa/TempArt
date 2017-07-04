@@ -11,8 +11,8 @@ public class Hot extends ColorGradient{
 
     @Override
     Color getColor(float temp) {
-        float colorTemp = (temp - super.tempMin) /  tempWidth;
-        Color color = new Color((float) Math.sqrt(colorTemp), (float) Math.min(Math.max(Math.pow(colorTemp,3.0),0),1), (float) Math.max(Math.sin(2*Math.PI*colorTemp),0),1);
+        float normalizedTemperature = (temp - super.tempMin) /  tempWidth;
+        Color color = new Color((float) Math.sqrt(normalizedTemperature), (float) Math.min(Math.max(Math.pow(normalizedTemperature,3.0),0),1), (float) Math.max(Math.sin(2*Math.PI*normalizedTemperature),0),1);
         return color;
     }
 }

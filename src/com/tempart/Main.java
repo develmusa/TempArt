@@ -18,18 +18,18 @@ public class Main {
         dataSets.put("Brugg_1990", "./data/history_export_Brugg_19900101-19910101-20160921.csv");
         dataSets.put("Rapperswil_2015", "./data/history_export_Rapperswil_20150101-20160101_20160921.csv");
 
-        final ArrayList<TemperaturPicture> pictures = new ArrayList<>();
+        final ArrayList<TemperaturePicture> pictures = new ArrayList<>();
 
         for (Map.Entry<String, String> data : dataSets.entrySet()) {
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT));
-            pictures.add(new TemperaturPicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT, 288, 365, 9504, 9490));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV, 288, 365, 9504, 9490));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT, 288, 365, 9504, 9490));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW, 288, 365, 9504, 9490));
         }
 
-        for (TemperaturPicture picture: pictures) {
+        for (TemperaturePicture picture: pictures) {
             try {
-                picture.drawImage();
+                picture.generateImage();
             } catch(IOException | ParseException e){
                 e.printStackTrace();
             }

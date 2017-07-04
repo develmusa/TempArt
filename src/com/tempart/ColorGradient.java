@@ -11,7 +11,7 @@ public abstract class ColorGradient {
 	 * https://astro.uni-bonn.de/~ithies/gnuplot/colortools/rgbformulae.gp
 	 */
 
-    float tempWidth;
+    public float tempWidth;
     public float tempMin;
 
     public void setTemperaturs(float tempMax, float tempMin){
