@@ -2,30 +2,30 @@ package com.tempart;
 
 import java.awt.*;
 
-/**
- * Created by samuel on 04.07.17.
- */
 public class TemperatureImage {
-    private final String inputPath;
     private final String outputPath;
     private final Rectangle inputDataDimensions;
     private final Rectangle outputPictureDimensions;
     private final ColorGradient pictureColor;
+    private final DataSet dataSet;
+    private final String regex;
 
-    public TemperatureImage(String outputPath, String inputPath, ColorMap color, Rectangle inputDataDimensions, Rectangle outputPictureDimensions){
+    public TemperatureImage(String outputPath, String inputPath, ColorMap color, Rectangle inputDataDimensions, Rectangle outputPictureDimensions, String regex){
         this.outputPath = outputPath;
-        this.inputPath = inputPath;
+        this.dataSet = new DataSet(inputPath);
         this.pictureColor = new ColorGradientFactory().getColorGradient(color);
         this.inputDataDimensions = inputDataDimensions;
         this.outputPictureDimensions = outputPictureDimensions;
+        this.regex = regex;
     }
 
-    public String getInputPath() {
-        return inputPath;
-    }
 
     public String getOutputPath() {
         return outputPath;
+    }
+
+    public DataSet getDataSet() {
+        return dataSet;
     }
 
     public Rectangle getInputDataDimensions() {
@@ -40,6 +40,9 @@ public class TemperatureImage {
     }
 
 
+    public String getRegex() {
+        return regex;
+    }
 }
 
 

@@ -21,10 +21,9 @@ public final class ImageGenerator {
     }
 
     private static Queue<Double> loadData(TemperatureImage temperatureImage) throws FileNotFoundException, ParseException {
-        DataReader dataReader = new DataReader(temperatureImage.getInputPath());
-        dataReader.readFile();
-        Queue<Double> temperatures = scaleImage(temperatureImage, dataReader.getTemeratures());
-        temperatureImage.getPictureColor().setTemperaturs((float)dataReader.getHighestTemp(), (float)dataReader.getLowestTemp());
+        DataParser.readFile(temperatureImage.getDataSet(), temperatureImage.getRegex());
+        Queue<Double> temperatures = scaleImage(temperatureImage, temperatureImage.getDataSet().getTemperatures());
+        temperatureImage.getPictureColor().setTemperaturs((float) temperatureImage.getDataSet().getHighestTemp(), (float) temperatureImage.getDataSet().getLowestTemp());
         return temperatures;
     }
 
