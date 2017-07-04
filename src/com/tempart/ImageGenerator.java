@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
-public final class ImageGenerator {
+final class ImageGenerator {
 
 
     private ImageGenerator(){}
@@ -26,7 +26,7 @@ public final class ImageGenerator {
     private static Queue<Double> loadData(TemperatureImage temperatureImage) throws FileNotFoundException, ParseException {
         DataParser.readFile(temperatureImage.getDataSet(), temperatureImage.getRegex());
         Queue<Double> temperatures = scaleImage(temperatureImage, temperatureImage.getDataSet().getTemperatures());
-        temperatureImage.getPictureColor().setTemperaturs((float) temperatureImage.getDataSet().getHighestTemp(), (float) temperatureImage.getDataSet().getLowestTemp());
+        temperatureImage.getPictureColor().setTemperatures((float) temperatureImage.getDataSet().getHighestTemp(), (float) temperatureImage.getDataSet().getLowestTemp());
         return temperatures;
     }
 
@@ -54,10 +54,10 @@ public final class ImageGenerator {
         System.out.println("\tWriting File: " + temperatureImage.getOutputPath());
         File outputFile = new File(temperatureImage.getOutputPath());
         ImageIO.write(img, "PNG", outputFile);
-        System.out.println("Picture successful generated\n\n");
+        System.out.println("Picture successfully generated\n\n");
     }
 
-    public static Queue<Double> scaleImage(TemperatureImage temperatureImage, Queue<Double> temperatures){
+    private static Queue<Double> scaleImage(TemperatureImage temperatureImage, Queue<Double> temperatures){
         Queue<Double> temperaturesScaled = new LinkedList<>();
         double previousTemperature;
         while (!temperatures.isEmpty()){

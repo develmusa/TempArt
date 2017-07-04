@@ -7,7 +7,7 @@ import com.tempart.datahandling.DataSet;
 
 import java.awt.*;
 
-public class TemperatureImage {
+class TemperatureImage {
     private final String outputPath;
     private final Rectangle inputDataDimensions;
     private final Rectangle outputPictureDimensions;

@@ -44,18 +44,17 @@ public final class DataParser {
         }
     }
 
-    private static double temperaturePatternMatcher(String attributes, String regex) throws ParseException {
+    private static double temperaturePatternMatcher(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         if(matcher.find()){
-            double temp = Double.parseDouble(matcher.group(6));
-            return temp;
+            return Double.parseDouble(matcher.group(6));
         } else {
             return Double.MIN_VALUE;
         }
     }
 
-    public static LocalDateTime timePatternMatcher(String attributes, String regex) {
+    private static LocalDateTime timePatternMatcher(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         LocalDateTime time;

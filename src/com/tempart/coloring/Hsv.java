@@ -2,9 +2,7 @@ package com.tempart.coloring;
 
 import java.awt.*;
 
-/**
- * Created by sikcd on 21.09.2016.
- */
+
 public class Hsv extends ColorGradient {
 
 

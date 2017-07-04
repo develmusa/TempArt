@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class DataSet {
-    private String path;
-    private Queue<Double> temperatures = new LinkedList<>();
-    private Queue<DataPoint> dataPointsRaw = new LinkedList<>();
+    private final String path;
+    private final Queue<Double> temperatures = new LinkedList<>();
+    private final Queue<DataPoint> dataPointsRaw = new LinkedList<>();
     private double highestTemp;
     private double lowestTemp;
 

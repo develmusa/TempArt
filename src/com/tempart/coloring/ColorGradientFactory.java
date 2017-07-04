@@ -1,8 +1,5 @@
 package com.tempart.coloring;
 
-/**
- * Created by samuel on 04.07.17.
- */
 public class ColorGradientFactory {
     public ColorGradient getColorGradient(ColorMap colorMap){
         switch (colorMap) {

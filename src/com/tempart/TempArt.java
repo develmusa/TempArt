@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 
-public class TempArt {
+class TempArt {
     public static void main(String[] args) {
 
         final HashMap<String, String> dataSets  = new HashMap<>();
@@ -22,7 +22,7 @@ public class TempArt {
         dataSets.put("Rapperswil_2015", "./data/history_export_Rapperswil_20150101-20160101_20160921.csv");
 
         //Regex for Parsing the Data
-        String regex = new String("([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)");
+        String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
 
         //Dimensions of input data (x,y)
         Rectangle inputDataDimensions = new Rectangle(288,365);
