@@ -1,10 +1,13 @@
 package com.tempart;
 
+import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Map.Entry;
+
 
 public class Main {
 
@@ -20,11 +23,16 @@ public class Main {
 
         final ArrayList<TemperaturePicture> pictures = new ArrayList<>();
 
-        for (Map.Entry<String, String> data : dataSets.entrySet()) {
-            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT, 288, 365, 9504, 9490));
-            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV, 288, 365, 9504, 9490));
-            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT, 288, 365, 9504, 9490));
-            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW, 288, 365, 9504, 9490));
+        //Dimensions of input data (x,y)
+        Rectangle inputData = new Rectangle(288,365);
+        //Dimensions of the output picture (x,y)
+        Rectangle outputPicture = new Rectangle(9504,9490);
+
+        for (Entry<String, String> data : dataSets.entrySet()) {
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT, inputData, outputPicture));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV, inputData, outputPicture));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT, inputData, outputPicture));
+            pictures.add(new TemperaturePicture("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW, inputData, outputPicture));
         }
 
         for (TemperaturePicture picture: pictures) {

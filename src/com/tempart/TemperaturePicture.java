@@ -1,6 +1,7 @@
 package com.tempart;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,21 +12,17 @@ import java.util.*;
 public class TemperaturePicture {
     private final String inputPath;
     private final String outputPath;
-    private final int inputSizeY;
-    private final int inputSizeX;
-    private final int outputSizeY;
-    private final int outputSizeX;
+    private final Rectangle inputData;
+    private final Rectangle outputPicture;
     private final ColorGradient pictureColor;
 
 
-    public TemperaturePicture(String outputPath, String inputPath, ColorMap color, int inputSizeX, int inputSizeY, int outputSizeX, int outputSizeY) {
+    public TemperaturePicture(String outputPath, String inputPath, ColorMap color, Rectangle inputData, Rectangle outputPicture) {
         this.outputPath = outputPath;
         this.inputPath = inputPath;
         this.pictureColor = new ColorGradientFactory().getColorGradient(color);
-        this.inputSizeX = inputSizeX;
-        this.inputSizeY = inputSizeY;
-        this.outputSizeX = outputSizeX;
-        this.outputSizeY = outputSizeY;
+        this.inputData = inputData;
+        this.outputPicture = outputPicture;
     }
 
 
@@ -44,14 +41,14 @@ public class TemperaturePicture {
     }
 
     private BufferedImage drawImage(Queue<Double> temperatures) {
-        BufferedImage img = new BufferedImage(outputSizeX, outputSizeY, BufferedImage.TYPE_INT_ARGB );
-        for(int y = 0; y < outputSizeY; y++) {
-            if(y % (outputSizeY/inputSizeY) == 0){
-                for (int x = 0; x < outputSizeX; x++) {
+        BufferedImage img = new BufferedImage(outputPicture.width, outputPicture.height, BufferedImage.TYPE_INT_ARGB );
+        for(int y = 0; y < outputPicture.height; y++) {
+            if(y % (outputPicture.height/inputData.height) == 0){
+                for (int x = 0; x < outputPicture.width; x++) {
                     img.setRGB(x, y, pictureColor.getColor((float) temperatures.poll().doubleValue()).getRGB());
                 }
             } else {
-                for (int x = 0; x < outputSizeX; x++) {
+                for (int x = 0; x < outputPicture.width; x++) {
                     img.setRGB(x, y, img.getRGB(x, y - 1));
                 }
             }
@@ -79,7 +76,7 @@ public class TemperaturePicture {
                 double y2 = temperatures.peek();
                 double slope = (y2 - y1) / (x2 - x1);
                 temperaturesScaled.add(previousTemperature);
-                for (int x = 1; x < (outputSizeX / inputSizeX); x++){
+                for (int x = 1; x < (outputPicture.width / inputData.width); x++){
                     temperaturesScaled.add(slope * x + y1);
                 }
             }
