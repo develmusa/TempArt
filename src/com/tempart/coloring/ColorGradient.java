@@ -1,4 +1,4 @@
-package com.tempart;
+package com.tempart.coloring;
 
 import java.awt.*;
 
@@ -19,5 +19,5 @@ public abstract class ColorGradient {
         tempWidth = tempMax - tempMin;
     }
 
-    abstract Color getColor(float temp);
+    abstract public Color getColor(float temp);
 }

@@ -1,5 +1,7 @@
 package com.tempart;
 
+import com.tempart.coloring.ColorMap;
+
 import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
@@ -8,10 +10,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 
-public class Main {
-
-
-
+public class TempArt {
     public static void main(String[] args) {
 
         final HashMap<String, String> dataSets  = new HashMap<>();

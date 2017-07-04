@@ -1,4 +1,4 @@
-package com.tempart;
+package com.tempart.coloring;
 
 import java.awt.*;
 
@@ -9,7 +9,7 @@ public class Hsv extends ColorGradient {
 
 
     @Override
-    Color getColor(float temp) {
+    public Color getColor(float temp) {
         float colorTemp = (temp - super.tempMin) /  tempWidth;
         return Color.getHSBColor(colorTemp, 1, 1);
     }

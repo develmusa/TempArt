@@ -1,4 +1,4 @@
-package com.tempart;
+package com.tempart.datahandling;
 
 import java.time.LocalDateTime;
 

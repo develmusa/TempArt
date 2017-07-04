@@ -1,4 +1,4 @@
-package com.tempart;
+package com.tempart.coloring;
 
 import java.awt.*;
 
@@ -8,7 +8,7 @@ import java.awt.*;
 public class AfmHot extends ColorGradient {
 
     @Override
-    Color getColor(float temp) {
+    public Color getColor(float temp) {
         float colorTemp = (temp - super.tempMin) /  tempWidth;
         Color color = new Color(Math.min(2*colorTemp,1), Math.min(Math.max((float)(2*colorTemp-0.5),0),1), Math.max(2*colorTemp-1,0));
         return color;

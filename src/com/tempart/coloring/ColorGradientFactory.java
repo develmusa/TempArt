@@ -1,4 +1,4 @@
-package com.tempart;
+package com.tempart.coloring;
 
 /**
  * Created by samuel on 04.07.17.

@@ -1,5 +1,10 @@
 package com.tempart;
 
+import com.tempart.coloring.ColorGradient;
+import com.tempart.coloring.ColorGradientFactory;
+import com.tempart.coloring.ColorMap;
+import com.tempart.datahandling.DataSet;
+
 import java.awt.*;
 
 public class TemperatureImage {
