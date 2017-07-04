@@ -18,7 +18,6 @@ class TempArt {
 
         //Data Sets with temperature values
         dataSets.put("example_data", "./data/example_data.csv");
-        //dataSets.put("Test", "./data/history_export_Copenhagen_19930101-19940101_20160921.csv");
 
         //Regex for Parsing the Data
         String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
@@ -35,7 +34,6 @@ class TempArt {
             temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_Hot.png", data.getValue(), ColorMap.HOT, inputDataDimensions, outputPictureDimensions, regex));
             temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_Rainbow.png", data.getValue(), ColorMap.RAINBOW, inputDataDimensions, outputPictureDimensions, regex));
         }
-
 
         try {
             for (TemperatureImage temperatureImage : temperatureImages) {
