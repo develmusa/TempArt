@@ -8,15 +8,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
 final class ImageGenerator {
 
 
-    private ImageGenerator(){}
+    private ImageGenerator() {
+    }
 
 
-    public static void generateImage(TemperatureImage temperatureImage) throws IOException, ParseException {
+    static void generateImage(TemperatureImage temperatureImage) throws IOException, ParseException {
         System.out.println("Starting Image Generation");
         Queue<Double> temperatures = loadData(temperatureImage);
         BufferedImage img = drawImage(temperatureImage, temperatures);
@@ -31,11 +33,11 @@ final class ImageGenerator {
     }
 
     private static BufferedImage drawImage(TemperatureImage temperatureImage, Queue<Double> temperatures) throws IOException {
-        BufferedImage img = new BufferedImage(temperatureImage.getOutputPictureDimensions().width, temperatureImage.getOutputPictureDimensions().height, BufferedImage.TYPE_INT_ARGB );
-        for(int y = 0; y < temperatureImage.getOutputPictureDimensions().height; y++) {
-            String data = "\r\tCalculating Colors("+ temperatureImage.getColor().toString()+"):\t" + (y*100/temperatureImage.getOutputPictureDimensions().height) + "%";
+        BufferedImage img = new BufferedImage(temperatureImage.getOutputPictureDimensions().width, temperatureImage.getOutputPictureDimensions().height, BufferedImage.TYPE_INT_ARGB);
+        for (int y = 0; y < temperatureImage.getOutputPictureDimensions().height; y++) {
+            String data = "\r\tCalculating Colors(" + temperatureImage.getColor().toString() + "):\t" + (y * 100 / temperatureImage.getOutputPictureDimensions().height) + "%";
             System.out.write(data.getBytes());
-            if(y % (temperatureImage.getOutputPictureDimensions().height/ temperatureImage.getInputDataDimensions().height) == 0){
+            if (y % (temperatureImage.getOutputPictureDimensions().height / temperatureImage.getInputDataDimensions().height) == 0) {
                 for (int x = 0; x < temperatureImage.getOutputPictureDimensions().width; x++) {
                     img.setRGB(x, y, temperatureImage.getPictureColor().getColor((float) temperatures.poll().doubleValue()).getRGB());
                 }
@@ -45,7 +47,7 @@ final class ImageGenerator {
                 }
             }
         }
-        String data = "\r\tCalculating Colors("+ temperatureImage.getColor().toString()+"):\t100%\n";
+        String data = "\r\tCalculating Colors(" + temperatureImage.getColor().toString() + "):\t100%\n";
         System.out.write(data.getBytes());
         return img;
     }
@@ -57,12 +59,12 @@ final class ImageGenerator {
         System.out.println("Picture successfully generated\n\n");
     }
 
-    private static Queue<Double> scaleImage(TemperatureImage temperatureImage, Queue<Double> temperatures){
+    private static Queue<Double> scaleImage(TemperatureImage temperatureImage, Queue<Double> temperatures) {
         Queue<Double> temperaturesScaled = new LinkedList<>();
         double previousTemperature;
-        while (!temperatures.isEmpty()){
+        while (!temperatures.isEmpty()) {
             previousTemperature = temperatures.poll();
-            if (temperatures.isEmpty()){
+            if (temperatures.isEmpty()) {
                 temperaturesScaled.add(previousTemperature);
             } else {
                 double x1 = 0;
@@ -71,7 +73,7 @@ final class ImageGenerator {
                 double y2 = temperatures.peek();
                 double slope = (y2 - y1) / (x2 - x1);
                 temperaturesScaled.add(previousTemperature);
-                for (int x = 1; x < (temperatureImage.getOutputPictureDimensions().width / temperatureImage.getInputDataDimensions().width); x++){
+                for (int x = 1; x < (temperatureImage.getOutputPictureDimensions().width / temperatureImage.getInputDataDimensions().width); x++) {
                     temperaturesScaled.add(slope * x + y1);
                 }
             }

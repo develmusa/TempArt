@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.ParseException;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +17,7 @@ public final class DataParser {
     public static void readFile(DataSet dataSet, String regex) throws FileNotFoundException, ParseException {
         System.out.println("\tReading Data Set:\t" + dataSet.getPath());
         Scanner scanner = new Scanner(new File(dataSet.getPath()));
-        while(scanner.hasNext()){
+        while (scanner.hasNext()) {
             String scannerIn = scanner.nextLine();
             double temperature = temperaturePatternMatcher(scannerIn, regex);
             LocalDateTime time = timePatternMatcher(scannerIn, regex);
@@ -31,14 +31,13 @@ public final class DataParser {
     }
 
     private static void writeData(DataSet dataSet, double temperature, LocalDateTime time) {
-        if (time != null){
+        if (time != null) {
             dataSet.getTemperatures().add(temperature);
             DataPoint datapoint = new DataPoint(time, temperature);
             dataSet.getDataPointsRaw().add(datapoint);
             if (temperature > dataSet.getHighestTemp()) {
                 dataSet.setHighestTemp(temperature);
-            }
-            else if (temperature < dataSet.getLowestTemp()) {
+            } else if (temperature < dataSet.getLowestTemp()) {
                 dataSet.setLowestTemp(temperature);
             }
         }
@@ -47,7 +46,7 @@ public final class DataParser {
     private static double temperaturePatternMatcher(String attributes, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
-        if(matcher.find()){
+        if (matcher.find()) {
             return Double.parseDouble(matcher.group(6));
         } else {
             return Double.MIN_VALUE;
@@ -58,7 +57,7 @@ public final class DataParser {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(attributes);
         LocalDateTime time;
-        if(matcher.find()){
+        if (matcher.find()) {
             time = LocalDateTime.of(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)), Integer.parseInt(matcher.group(4)), Integer.parseInt(matcher.group(5)));
             return time;
         }

@@ -17,7 +17,7 @@ class TemperatureImage {
 
     private final ColorMap color;
 
-    public TemperatureImage(String outputPath, String inputPath, ColorMap color, Rectangle inputDataDimensions, Rectangle outputPictureDimensions, String regex){
+    TemperatureImage(String outputPath, String inputPath, ColorMap color, Rectangle inputDataDimensions, Rectangle outputPictureDimensions, String regex) {
         this.outputPath = outputPath;
         this.dataSet = new DataSet(inputPath);
         this.color = color;
@@ -27,32 +27,33 @@ class TemperatureImage {
         this.regex = regex;
     }
 
-    public String getOutputPath() {
+    String getOutputPath() {
         return outputPath;
     }
 
 
-    public DataSet getDataSet() {
+    DataSet getDataSet() {
         return dataSet;
     }
 
-    public Rectangle getInputDataDimensions() {
+    Rectangle getInputDataDimensions() {
         return inputDataDimensions;
     }
 
-    public Rectangle getOutputPictureDimensions() {
+    Rectangle getOutputPictureDimensions() {
         return outputPictureDimensions;
     }
 
-    public ColorGradient getPictureColor() {
+    ColorGradient getPictureColor() {
         return pictureColor;
     }
-    public String getRegex() {
+
+    String getRegex() {
         return regex;
     }
 
 
-    public ColorMap getColor() {
+    ColorMap getColor() {
         return color;
     }
 }

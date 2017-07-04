@@ -1,12 +1,12 @@
 package com.tempart.coloring;
 
 public class ColorGradientFactory {
-    public ColorGradient getColorGradient(ColorMap colorMap){
+    public ColorGradient getColorGradient(ColorMap colorMap) {
         switch (colorMap) {
             case HOT:
                 return new Hot();
             case AFMHOT:
-                return  new AfmHot();
+                return new AfmHot();
             case HSV:
                 return new Hsv();
             case RAINBOW:

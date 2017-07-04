@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 class TempArt {
     public static void main(String[] args) {
 
-        final HashMap<String, String> dataSets  = new HashMap<>();
+        final HashMap<String, String> dataSets = new HashMap<>();
         final ArrayList<TemperatureImage> temperatureImages = new ArrayList<>();
 
         //Data Sets with temperature values
@@ -25,22 +25,22 @@ class TempArt {
         String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
 
         //Dimensions of input data (x,y)
-        Rectangle inputDataDimensions = new Rectangle(288,365);
-        //Dimensions of the output picture (x,y)
-        Rectangle outputPictureDimensions = new Rectangle(9504,9490);
+        Rectangle inputDataDimensions = new Rectangle(288, 365);
 
+        //Dimensions of the output picture (x,y)
+        Rectangle outputPictureDimensions = new Rectangle(9504, 9490);
 
         for (Entry<String, String> data : dataSets.entrySet()) {
-            temperatureImages.add(new TemperatureImage("outputPicture/"+ data.getKey() +"_AfmHot.png", data.getValue(), ColorMap.AFMHOT, inputDataDimensions, outputPictureDimensions, regex));
-            temperatureImages.add(new TemperatureImage("outputPicture/"+ data.getKey() +"_HSV.png", data.getValue(), ColorMap.HSV, inputDataDimensions, outputPictureDimensions, regex));
-            temperatureImages.add(new TemperatureImage("outputPicture/"+ data.getKey() +"_Hot.png", data.getValue(), ColorMap.HOT, inputDataDimensions, outputPictureDimensions, regex));
-            temperatureImages.add(new TemperatureImage("outputPicture/"+ data.getKey() +"_Rainbow.png", data.getValue(), ColorMap.RAINBOW, inputDataDimensions, outputPictureDimensions, regex));
+            temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_AfmHot.png", data.getValue(), ColorMap.AFMHOT, inputDataDimensions, outputPictureDimensions, regex));
+            temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_HSV.png", data.getValue(), ColorMap.HSV, inputDataDimensions, outputPictureDimensions, regex));
+            temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_Hot.png", data.getValue(), ColorMap.HOT, inputDataDimensions, outputPictureDimensions, regex));
+            temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_Rainbow.png", data.getValue(), ColorMap.RAINBOW, inputDataDimensions, outputPictureDimensions, regex));
         }
 
         for (TemperatureImage temperatureImage : temperatureImages) {
             try {
                 ImageGenerator.generateImage(temperatureImage);
-            } catch(IOException | ParseException e){
+            } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         }

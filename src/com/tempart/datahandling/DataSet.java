@@ -10,11 +10,11 @@ public class DataSet {
     private double highestTemp;
     private double lowestTemp;
 
-    public DataSet (String path) {
+    public DataSet(String path) {
         this.path = path;
     }
 
-    public String getPath() {
+    String getPath() {
         return path;
     }
 
@@ -23,7 +23,7 @@ public class DataSet {
         return temperatures;
     }
 
-    public Queue<DataPoint> getDataPointsRaw() {
+    Queue<DataPoint> getDataPointsRaw() {
         return dataPointsRaw;
     }
 
@@ -32,7 +32,7 @@ public class DataSet {
         return highestTemp;
     }
 
-    public void setHighestTemp(double highestTemp) {
+    void setHighestTemp(double highestTemp) {
         this.highestTemp = highestTemp;
     }
 
@@ -40,7 +40,7 @@ public class DataSet {
         return lowestTemp;
     }
 
-    public void setLowestTemp(double lowestTemp) {
+    void setLowestTemp(double lowestTemp) {
         this.lowestTemp = lowestTemp;
     }
 
