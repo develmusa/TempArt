@@ -18,15 +18,20 @@ final class ImageGenerator {
     }
 
 
-    static void generateImage(TemperatureImage temperatureImage) throws IOException, ParseException {
+    static void generateImage(TemperatureImage temperatureImage) throws IOException, ParseException, InputDimensionException {
         System.out.println("Starting Image Generation");
         Queue<Double> temperatures = loadData(temperatureImage);
         BufferedImage img = drawImage(temperatureImage, temperatures);
         writeImage(temperatureImage, img);
     }
 
-    private static Queue<Double> loadData(TemperatureImage temperatureImage) throws FileNotFoundException, ParseException {
+
+    private static Queue<Double> loadData(TemperatureImage temperatureImage) throws FileNotFoundException, ParseException, InputDimensionException {
         DataParser.readFile(temperatureImage.getDataSet(), temperatureImage.getRegex());
+        int specifiedDataSetSize = temperatureImage.getInputDataDimensions().height * temperatureImage.getInputDataDimensions().width;
+        if (temperatureImage.getDataSet().getTemperatures().size() < specifiedDataSetSize) {
+            throw new InputDimensionException("To few Data Points (Specified: " + specifiedDataSetSize + "\tFound:" + temperatureImage.getDataSet().getTemperatures().size() + ")");
+        }
         Queue<Double> temperatures = scaleImage(temperatureImage, temperatureImage.getDataSet().getTemperatures());
         temperatureImage.getPictureColor().setTemperatures((float) temperatureImage.getDataSet().getHighestTemp(), (float) temperatureImage.getDataSet().getLowestTemp());
         return temperatures;

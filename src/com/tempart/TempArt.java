@@ -17,15 +17,14 @@ class TempArt {
         final ArrayList<TemperatureImage> temperatureImages = new ArrayList<>();
 
         //Data Sets with temperature values
-        dataSets.put("Copenhagen_1993", "./data/history_export_Copenhagen_19930101-19940101_20160921.csv");
-        dataSets.put("Brugg_1990", "./data/history_export_Brugg_19900101-19910101-20160921.csv");
-        dataSets.put("Rapperswil_2015", "./data/history_export_Rapperswil_20150101-20160101_20160921.csv");
+        dataSets.put("example_data", "./data/example_data.csv");
+        //dataSets.put("Test", "./data/history_export_Copenhagen_19930101-19940101_20160921.csv");
 
         //Regex for Parsing the Data
         String regex = "([0-9]*)-([0-9]*)-([0-9]*)T([0-9]*):([0-9]*);(-?[0-9]*.[0-9]*)";
 
         //Dimensions of input data (x,y)
-        Rectangle inputDataDimensions = new Rectangle(288, 365);
+        Rectangle inputDataDimensions = new Rectangle(288, 2);
 
         //Dimensions of the output picture (x,y)
         Rectangle outputPictureDimensions = new Rectangle(9504, 9490);
@@ -37,12 +36,16 @@ class TempArt {
             temperatureImages.add(new TemperatureImage("outputPicture/" + data.getKey() + "_Rainbow.png", data.getValue(), ColorMap.RAINBOW, inputDataDimensions, outputPictureDimensions, regex));
         }
 
-        for (TemperatureImage temperatureImage : temperatureImages) {
-            try {
+
+        try {
+            for (TemperatureImage temperatureImage : temperatureImages) {
                 ImageGenerator.generateImage(temperatureImage);
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
             }
+        } catch (IOException | ParseException | InputDimensionException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("\nPicture generation aborted.\n\n");
         }
+
     }
 }
